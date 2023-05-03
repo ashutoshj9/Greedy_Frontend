@@ -1,0 +1,32 @@
+.date-range-picker-container {
+  display: flex;
+  margin: 10px 0;
+}
+
+.date-range-picker-input {
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 15%;
+}
+
+.second {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+  margin: 3px;
+  padding: 5px 50px;
+  border: 0;
+  border-radius: 2px;
+}
+
+.secondButton {
+  padding: 5px 10px;
+  margin: 0px 2px;
+  border-width: 0.1px;
+  border-radius: 2px;
+  border-color: rgba(0, 0, 0, 0.1);
+}

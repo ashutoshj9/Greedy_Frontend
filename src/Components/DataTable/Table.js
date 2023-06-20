@@ -3,7 +3,6 @@ import "./Table.css";
 import { FiFilter } from "react-icons/fi";
 
 const Table = ({ data, appData, visibleColumns }) => {
-  console.log(data);
   const [filterValues, setFilterValues] = useState({});
   const [filterVisibility, setFilterVisibility] = useState(false);
   const filterInputRefs = useRef({});
@@ -19,22 +18,15 @@ const Table = ({ data, appData, visibleColumns }) => {
       [columnName]: !prev[columnName],
     }));
   };
-  console.log(filterValues);
 
   const filterData = (data, columnName, filterValue) => {
-    try {
-      if (!filterValue) {
-        return data.data;
-      } else {
-        return data.data.filter((item) =>
-          String(item[columnName])
-            .toLowerCase()
-            .includes(filterValue.toLowerCase())
-        );
-      }
-    } catch (error) {
-      return null;
+    if (!filterValue) {
+      return data;
     }
+
+    return data.filter((item) =>
+      String(item[columnName]).toLowerCase().includes(filterValue.toLowerCase())
+    );
   };
 
   const showColumn = (columnName, item) => {
@@ -122,26 +114,28 @@ const Table = ({ data, appData, visibleColumns }) => {
         </thead>
         {visibleColumns && (
           <tbody>
-            {filterData(data, "app_id", filterValues["App"]).map((item) => (
-              <tr key={item.requests}>
-                <td>
-                  {new Date(item.date).toLocaleDateString("en-IN", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </td>
-                <td>
-                  {appData.data.map(
-                    (appItem) =>
-                      appItem.app_id === item.app_id && appItem.app_name
-                  )}
-                </td>
-                {visibleColumns.map((columnName, columnIndex) => (
-                  <td key={columnName}>{showColumn(columnName, item)}</td>
-                ))}
-              </tr>
-            ))}
+            {filterData(data.data, "app_id", filterValues["App"]).map(
+              (item) => (
+                <tr key={item.requests}>
+                  <td>
+                    {new Date(item.date).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </td>
+                  <td>
+                    {appData.data.map(
+                      (appItem) =>
+                        appItem.app_id === item.app_id && appItem.app_name
+                    )}
+                  </td>
+                  {visibleColumns.map((columnName, columnIndex) => (
+                    <td key={columnName}>{showColumn(columnName, item)}</td>
+                  ))}
+                </tr>
+              )
+            )}
           </tbody>
         )}
       </table>

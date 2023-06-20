@@ -126,6 +126,14 @@ const DateRangePicker = () => {
             <button
               key={columnName}
               onClick={() => toggleColumnVisibility(columnName)}
+              // disabled={
+              //   !data ||
+              //   !data.data.some((item) =>
+              //     item.hasOwnProperty(
+              //       columnName.toLowerCase().replace(/\s/g, "_")
+              //     )
+              //   )
+              // }
               style={{
                 fontWeight: selectedColumns.includes(columnName)
                   ? "bold"
